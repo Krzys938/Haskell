@@ -1,4 +1,4 @@
-findInList :: (Real t) => t -> [t] -> t
+findInList :: (Integral t) => t -> [t] -> t
 findInList x l = findInList' x l 0
   where
     findInList' x (h : t) depth
@@ -6,14 +6,13 @@ findInList x l = findInList' x l 0
       | null t = -1
       | otherwise = findInList' x t (depth + 1)
 
-getDecimal :: (Real a) => a -> a
-getDecimal n
-  | x > 1 = x - 1
+getRest n denomin
+  | x >= denomin = x - denomin
   | otherwise = x
   where x = n * 2
 
-func (h:t) d
-  | d == 0 = h
-  | x == -1 = func (getDecimal h : h:t) (d-1)
-  | otherwise = x
-  where x = findInList (getDecimal h) (h:t)
+func (h:t) denomin
+  | x == -1 = func (getRest h denomin : h:t) denomin
+  | h == 0 = x
+  | otherwise = x + 1
+  where x = findInList (getRest h denomin) (h:t)
