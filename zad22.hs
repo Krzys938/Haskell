@@ -6,8 +6,10 @@ findInList x l = findInList' x l 0
       | null t = -1
       | otherwise = findInList' x t (depth + 1)
 
+getRest :: (Integral a) => a -> a -> a
 getRest n denomin = (n * 2) `mod` denomin
 
+getPeriodLength :: (Integral a) => [a] -> a -> a
 getPeriodLength (h : t) denomin
   | x == -1 = getPeriodLength (getRest h denomin : h : t) denomin
   | h == 0 = 0
@@ -15,6 +17,7 @@ getPeriodLength (h : t) denomin
   where
     x = findInList (getRest h denomin) (h : t)
 
+getLongestPeriod :: (Integral a) => a -> [a]
 getLongestPeriod n =
   map snd (filter (\(x, _) -> x == m) l)
   where

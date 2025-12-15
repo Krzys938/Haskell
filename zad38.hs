@@ -6,10 +6,9 @@ addToList (h : t) v
   | otherwise = h : addToList t v
 
 prefixlessSum :: (Integral a) => [a] -> a -> a
-prefixlessSum (h : t) n
-  | n == 0 = sum (h : t)
-  | otherwise = prefixlessSum (addToList (addToList t (h + 1)) (h + 4)) (n - 1)
+prefixlessSum l 0 = sum l
+prefixlessSum (h : t) n = prefixlessSum (addToList (addToList t (h + 1)) (h + 4)) (n - 1)
 
-prefixlessCode :: (Integral a) => a -> a
-prefixlessCode 1 = 1
-prefixlessCode n = prefixlessSum [0] (n - 1)
+cost :: (Integral a) => a -> a
+cost 1 = 1
+cost n = prefixlessSum [0] (n - 1)
